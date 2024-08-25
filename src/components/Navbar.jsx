@@ -1,53 +1,102 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-opacity-90');
+      } else {
+        nav.classList.remove('bg-opacity-90');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div>
-       <header className="lg:px-16 px-4 bg-black flex flex-wrap items-center py-4 shadow-md">
-      <div className="flex-1 flex justify-between items-center">
-        <a href="#" className="text-xl text-pink-500 font-bold transition-transform transform hover:scale-105">
-        𝒮𝑜𝓌𝓂𝒾
+    <nav className="bg-black  text-blue-900 shadow-lg fixed w-full z-20 top-0 left-0">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#Home" className="flex items-center">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap">SOWMI</span>
         </a>
-      </div>
-      <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
-        <svg className="fill-current text-pink-500" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-          <title>menu</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-        </svg>
-      </label>
 
-      <input className="hidden" type="checkbox" id="menu-toggle" />
+        <button
+          onClick={toggleMenu}
+          type="button"
+          className="inline-flex items-center p-2 ml-3 text-sm text-pink-500 rounded-lg md:hidden hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+          aria-controls="navbar-search"
+          aria-expanded="false"
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg
+            className="w-6 h-6"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zM3 9a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zM4 13a1 1 0 100 2h12a1 1 0 100-2H4z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
 
-      
-      <div className="hidden md:flex md:items-center md:w-auto w-full" id="menu">
-        <nav>
-          <ul className="md:flex items-center justify-between text-base text-blue-700 pt-4 md:pt-0">
+        <div
+          className={`${isOpen ? 'block' : 'hidden'} transition-all duration-300 ease-in-out w-full md:flex md:w-auto md:order-1`}
+          id="navbar-search"
+        >
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-pink-500 rounded-lg bg-black md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-black">
             <li>
-              <a className="md:p-4 py-3 px-0 block hover:text-pink-500 transition-colors duration-300" href="#Home">
-                HOME
+              <a
+                href="#Home"
+                className="block py-2 pl-3 pr-4  text-blue-900 rounded hover:bg-pink-700 md:hover:bg-transparent md:hover:text-pink-700 md:p-0"
+                aria-current="page"
+              >
+                Home
               </a>
             </li>
             <li>
-              <a className="md:p-4 py-3 px-0 block hover:text-pink-500 transition-colors duration-300" href="#About">
-                ABOUT
+              <a
+                href="#About"
+                className="block py-2 pl-3 pr-4  text-blue-900 rounded hover:bg-pink-700 md:hover:bg-transparent md:hover:text-pink-700 md:p-0"
+              >
+                About
               </a>
             </li>
             <li>
-              <a className="md:p-4 py-3 px-0 block hover:text-pink-500 transition-colors duration-300" href="#Service">
-                SERVICE
+              <a
+                href="#Service"
+                className="block py-2 pl-3 pr-4  text-blue-900 rounded hover:bg-pink-700 md:hover:bg-transparent md:hover:text-pink-700 md:p-0"
+              >
+                Services
               </a>
             </li>
             <li>
-              <a className="md:p-4 py-3 px-0 block md:mb-0 mb-2 hover:text-pink-500 transition-colors duration-300" href="#Contact">
-                CONTACT
+              <a
+                href="#Contact"
+                className="block py-2 pl-3 pr-4 text-blue-900 rounded hover:bg-pink-700 md:hover:bg-transparent md:hover:text-pink-700 md:p-0"
+              >
+                Contact
               </a>
             </li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </header>
-    </div>
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

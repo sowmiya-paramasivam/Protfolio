@@ -1,10 +1,19 @@
-import React from 'react'
+import React from 'react';
 
 const About = () => {
   return (
     <div id="About">
-      <section className="pt-10 overflow-hidden bg-black text-white sm:pt-16">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+      <section className="relative pt-10 overflow-hidden bg-black text-white sm:pt-16">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-30"
+        >
+          <source src="/110371-688648556_tiny.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="relative z-10 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h2 className="text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl animate-fadeInUp">
@@ -31,7 +40,7 @@ const About = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
